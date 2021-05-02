@@ -1,0 +1,31 @@
+name: Contributor Labeler v1.02
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  contributor_labeler_job:
+    runs-on: ubuntu-latest
+    name: If author is not in CODEOWNERS, add contributor label
+    steps:
+      - name: Version
+        run: echo "v1.02"
+        
+      # To use this repository's private action,
+      # you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Contributor Labeler Action
+        uses: duthied/contributor-labeler@v1
+        id: labeler
+        with:
+          path: "contributor-labeler"
+          
+      - name: Add Label
+        # if the list of codeowners doesn't contain the PR author add the label
+        if: ${{ contains(steps.labeler.outputs.owners, github.actor) == false }}
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          labels: contributor
+          github_token: "${{ secrets.GITHUB_TOKEN }}"
