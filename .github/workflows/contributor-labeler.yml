@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Contributor Labeler Action
-        uses: duthied/contributor-labeler@v1.05
+        uses: duthied/contributor-labeler@1.05
         id: labeler
         with:
           owners_location: "./.github/CODEOWNERS"
