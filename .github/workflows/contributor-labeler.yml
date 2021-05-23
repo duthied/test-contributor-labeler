@@ -1,4 +1,4 @@
-name: Contributor Labeler v1.03
+name: Contributor Labeler v1.05
 on:
   pull_request:
     types: [opened]
@@ -9,7 +9,7 @@ jobs:
     name: If author is not in CODEOWNERS, add contributor label
     steps:
       - name: Version
-        run: echo "v1.03"
+        run: echo "v1.05"
         
       # To use this repository's private action,
       # you must check out the repository
@@ -17,10 +17,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Contributor Labeler Action
-        uses: duthied/contributor-labeler@v1.02
+        uses: duthied/contributor-labeler@v1.05
         id: labeler
         with:
-          path: "contributor-labeler"
+          owners_location: "./.github/CODEOWNERS"
           
       - name: Add Label
         # if the list of codeowners doesn't contain the PR author add the label
